@@ -1,4 +1,5 @@
-package TCP;
+package TCP_check_SNT;
+
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -17,9 +18,9 @@ public class Client {
         while (true) {
             System.out.println("Nhap vao 1 so nguyen: ");
             int a = new Scanner(System.in).nextInt();
-            dos.writeUTF(String.valueOf(a));
+            dos.writeInt(a);
 
-            System.out.println(a + " la " + dis.readUTF());
+            System.out.println(dis.readUTF());
         }
 
     }
