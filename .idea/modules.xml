@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/TryHard_LTM/TryHard_LTM.iml" filepath="$PROJECT_DIR$/TryHard_LTM/TryHard_LTM.iml" />
       <module fileurl="file://$PROJECT_DIR$/laptrinhmang_bart.iml" filepath="$PROJECT_DIR$/laptrinhmang_bart.iml" />
     </modules>
   </component>

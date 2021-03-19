@@ -1,0 +1,12 @@
+mot$one
+hai$two
+ba$three
+bon$four
+nam$five
+sau$six
+bay$seven
+tam$eight
+chin$nine
+muoi$ten
+khong$zero
+hai muoi$twenty
