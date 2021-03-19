@@ -48,7 +48,6 @@ public class Server {
 
     public static void ReadFile(DatagramSocket server, byte[] receiveData, DatagramPacket packetReceive) {
 
-
         try {
             //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
             File f = new File("/Users/trancaominhbach/Desktop/laptrinhmang_bart/src/Timtufile_UDP/nhanvien.dat");

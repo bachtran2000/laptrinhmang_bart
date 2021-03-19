@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
@@ -43,7 +44,7 @@ public class Server_File {
         int flag = 0;
         String found = "";
 
-        for (int i = 0; i <listTD.size(); i++) {
+        for (int i = 0; i < listTD.size(); i++) {
             if (listTD.get(i).getTV().equalsIgnoreCase(str_recieve)) {
                 found = listTD.get(i).getTA();
                 System.out.println(found);
@@ -74,7 +75,7 @@ public class Server_File {
         int flag = 0;
         String found = "";
 
-        for (int i = 0; i <listTD.size(); i++) {
+        for (int i = 0; i < listTD.size(); i++) {
             if (listTD.get(i).getTA().equalsIgnoreCase(str_recieve)) {
                 found = listTD.get(i).getTV();
                 System.out.println(found);
@@ -93,6 +94,24 @@ public class Server_File {
             DatagramPacket packetSend = new DatagramPacket(sendData, sendData.length, packetReceive.getAddress(), packetReceive.getPort());
             server.send(packetSend);
         }
+    }
+
+    public static void show(DatagramSocket server, byte[] receiveData, DatagramPacket packetReceive) throws IOException {
+        //gui so luong ve client
+        String str_send;
+        str_send = Integer.toString(listTD.size());
+        receiveData = str_send.getBytes(StandardCharsets.UTF_8);
+        DatagramPacket packetSend = new DatagramPacket(receiveData, receiveData.length, packetReceive.getAddress(), packetReceive.getPort());
+        server.send(packetSend);
+
+        //gui data tu dien
+        for (int i = 0; i < listTD.size(); i++) {
+            str_send = listTD.get(i).getTV() + " = " + listTD.get(i).getTA();
+            receiveData = str_send.getBytes(StandardCharsets.UTF_8);
+            packetSend = new DatagramPacket(receiveData, receiveData.length, packetReceive.getAddress(), packetReceive.getPort());
+            server.send(packetSend);
+        }
+
     }
 
     public static void main(String[] args) throws IOException {
@@ -114,10 +133,16 @@ public class Server_File {
                     EtoV(server);
                     break;
                 case "3":
+                    System.out.println("Da chon: " + str_receive);
+                    for (int i = 0; i < listTD.size(); i++) {
+                        System.out.println(listTD.get(i).getTV() + " = " + listTD.get(i).getTA());
+                    }
+                    show(server, recieveData, packetReceive);
+                    break;
+                case "4":
                     exit(0);
 
             }
         }
     }
-
 }

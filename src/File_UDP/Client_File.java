@@ -11,7 +11,8 @@ public class Client_File {
     public static void menu() {
         System.out.println("1. Viet to English");
         System.out.println("2. English to Viet");
-        System.out.println("3. Thoat");
+        System.out.println("3. Show tu dien");
+        System.out.println("4. Thoat");
         System.out.print("Chon: ");
     }
 
@@ -43,7 +44,7 @@ public class Client_File {
                     byte[] receiveData = new byte[1024];
                     DatagramPacket packetReceive = new DatagramPacket(receiveData, receiveData.length);
                     client.receive(packetReceive);
-                    String str_receive = new String(packetReceive.getData(),0,packetReceive.getLength());
+                    String str_receive = new String(packetReceive.getData(), 0, packetReceive.getLength());
                     System.out.println(str_receive);
                     break;
                 case "2":
@@ -64,10 +65,36 @@ public class Client_File {
                     receiveData = new byte[1024];
                     packetReceive = new DatagramPacket(receiveData, receiveData.length);
                     client.receive(packetReceive);
-                    str_receive = new String(packetReceive.getData(),0,packetReceive.getLength());
+                    str_receive = new String(packetReceive.getData(), 0, packetReceive.getLength());
                     System.out.println(str_receive);
                     break;
                 case "3":
+                    //gui case 3
+                    sendData = new byte[1024];
+                    sendData = str_send.getBytes(StandardCharsets.UTF_8);
+                    packetSend = new DatagramPacket(sendData, sendData.length, ip, 1001);
+                    client.send(packetSend);
+
+                    //nhan so n
+                    int n;
+                    receiveData = new byte[1024];
+                    packetReceive = new DatagramPacket(receiveData, receiveData.length);
+                    client.receive(packetReceive);
+                    str_receive = new String(packetReceive.getData(), 0, packetReceive.getLength());
+                    n = Integer.parseInt(str_receive);
+
+
+                    //nhan data tu server
+                    for (int i = 0; i < n; i++) {
+                        receiveData = new byte[1024];
+                        packetReceive = new DatagramPacket(receiveData, receiveData.length);
+                        client.receive(packetReceive);
+                        str_receive = new String(packetReceive.getData(), 0, packetReceive.getLength());
+                        System.out.println("|_____"+str_receive+"_________|");
+                    }
+                    System.out.println();
+                    break;
+                case "4":
                     sendData = new byte[1024];
                     sendData = str_send.getBytes(StandardCharsets.UTF_8);
                     packetSend = new DatagramPacket(sendData, sendData.length, ip, 1001);
