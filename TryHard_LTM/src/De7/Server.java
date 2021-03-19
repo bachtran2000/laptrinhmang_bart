@@ -10,9 +10,17 @@ import static java.lang.System.exit;
 public class Server {
     static ArrayList<Cauthu> dsct = new ArrayList<>();
 
-    public static int WriteFile_nCT(int n, Socket my_client, DataInputStream dis, DataOutputStream dos) throws IOException {
-        int flag = 0;
+    public static int NhapFile_n(int n,Socket my_client, DataInputStream dis, DataOutputStream dos) throws IOException {
+        int flag=0;
         for (int i = 0; i < n; i++) {
+            WriteFile_CT(my_client,dis,dos);
+            flag++;
+        }
+        return flag;
+    }
+
+    public static void WriteFile_CT( Socket my_client, DataInputStream dis, DataOutputStream dos) throws IOException {
+
             Cauthu ct = new Cauthu();
             dis = new DataInputStream(my_client.getInputStream());
             String s = dis.readUTF();
@@ -35,7 +43,6 @@ public class Server {
             dis = new DataInputStream(my_client.getInputStream());
             ct.setLuongMD(Float.parseFloat(dis.readUTF()));
 
-            System.out.println(ct.toString());
             dsct.add(ct);
 
             File f = new File("/Users/trancaominhbach/Desktop/laptrinhmang_bart/TryHard_LTM/src/De7/info_CT.txt");
@@ -44,9 +51,6 @@ public class Server {
             fw.write(ct.toString());
             fw.write("\n");
             fw.close();
-            flag++;
-        }
-        return flag;
     }
 
     public static void ReadFile() throws IOException {
@@ -95,7 +99,7 @@ public class Server {
                 case 1:
                     n = dis.readInt();
                     System.out.println("Da chon: " + n);
-                    int flag = WriteFile_nCT(n, my_client, dis, dos);
+                    int flag = NhapFile_n(n,my_client, dis, dos);
                     if (flag != 0) dos.writeUTF("Ghi thanh cong");
                     else dos.writeUTF("Ghi that bai!");
                     break;

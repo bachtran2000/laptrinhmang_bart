@@ -3,6 +3,7 @@ package De7;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.DatagramSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -11,6 +12,33 @@ public class Client {
         System.out.println("1. Them cau thu moi");
         System.out.println("2. Tinh tien luong");
         System.out.print("Chon: ");
+    }
+
+    public static void Nhap(Socket client, DataOutputStream dos, DataInputStream dis) throws IOException {
+
+        System.out.print("Nhap ma cau thu: ");
+        String str_send = new Scanner(System.in).nextLine();
+        dos.writeUTF(str_send);
+
+        System.out.print("Nhap ten: ");
+        str_send = new Scanner(System.in).nextLine();
+        dos = new DataOutputStream(client.getOutputStream());
+        dos.writeUTF(str_send);
+
+        System.out.print("Nhap nam sinh: ");
+        str_send = new Scanner(System.in).nextLine();
+        dos = new DataOutputStream(client.getOutputStream());
+        dos.writeUTF(str_send);
+
+        System.out.print("Nhap vi tri da: (1/2/3/4/5)");
+        str_send = new Scanner(System.in).nextLine();
+        dos = new DataOutputStream(client.getOutputStream());
+        dos.writeUTF(str_send);
+
+        System.out.print("Nhap luong: ");
+        str_send = new Scanner(System.in).nextLine();
+        dos = new DataOutputStream(client.getOutputStream());
+        dos.writeUTF(str_send);
     }
 
     public static void main(String[] args) throws IOException {
@@ -28,30 +56,9 @@ public class Client {
                     n = new Scanner(System.in).nextInt();
                     dos.writeInt(n);
                     System.out.println("Nhap vao thong tin cau thu: ");
-
-                    System.out.println("Nhap ma cau thu: ");
-                    String str_send = new Scanner(System.in).nextLine();
-                    dos.writeUTF(str_send);
-
-                    System.out.println("Nhap ten: ");
-                    str_send = new Scanner(System.in).nextLine();
-                    dos = new DataOutputStream(client.getOutputStream());
-                    dos.writeUTF(str_send);
-
-                    System.out.println("Nhap nam sinh: ");
-                    str_send = new Scanner(System.in).nextLine();
-                    dos = new DataOutputStream(client.getOutputStream());
-                    dos.writeUTF(str_send);
-
-                    System.out.println("Nhap vi tri da: (1/2/3/4/5)");
-                    str_send = new Scanner(System.in).nextLine();
-                    dos = new DataOutputStream(client.getOutputStream());
-                    dos.writeUTF(str_send);
-
-                    System.out.println("Nhap luong: ");
-                    str_send = new Scanner(System.in).nextLine();
-                    dos = new DataOutputStream(client.getOutputStream());
-                    dos.writeUTF(str_send);
+                    for (int i = 0; i < n; i++) {
+                        Nhap(client,dos,dis);
+                    }
 
                     System.out.println(dis.readUTF());
                     break;
