@@ -41,6 +41,13 @@ public class Client {
         dos.writeUTF(str_send);
     }
 
+    public static void TinhLuong(DataOutputStream dos,DataInputStream dis) throws IOException {
+        System.out.print("Nhap vao ma cau thu can tinh luong: ");
+        String str_send = new Scanner(System.in).nextLine();
+        dos.writeUTF(str_send);
+        dis.readUTF();
+    }
+
     public static void main(String[] args) throws IOException {
         Socket client = new Socket("127.0.0.1", 2349);
         DataOutputStream dos = new DataOutputStream(client.getOutputStream());
@@ -59,8 +66,10 @@ public class Client {
                     for (int i = 0; i < n; i++) {
                         Nhap(client,dos,dis);
                     }
-
                     System.out.println(dis.readUTF());
+                    break;
+                case 2:
+                    TinhLuong(dos,dis);
                     break;
             }
         }
