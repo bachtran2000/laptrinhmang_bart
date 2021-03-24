@@ -1,10 +1,9 @@
-package De7;
+package De7.Bai2;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import static java.lang.System.exit;
 

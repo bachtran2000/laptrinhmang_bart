@@ -1,4 +1,4 @@
-package De7;
+package De7.Bai2;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
