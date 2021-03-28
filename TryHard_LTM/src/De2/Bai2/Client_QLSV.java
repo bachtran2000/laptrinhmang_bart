@@ -24,6 +24,20 @@ public class Client_QLSV {
         System.out.print("Chon: ");
     }
 
+    public static void AddST(){
+        Student st = new Student();
+        System.out.print("Nhap ten: ");
+        st.setHT(new Scanner(System.in).nextLine());
+        System.out.print("Nhap Ngay sinh: ");
+        st.setNS(new Scanner(System.in).nextLine());
+        System.out.print("Nhap MSV: ");
+        st.setMSV(new Scanner(System.in).nextLine());
+        System.out.print("Nhap que quan: ");
+        st.setQQ(new Scanner(System.in).nextLine());
+        System.out.println(st.toString());
+        listST.add(st);
+    }
+
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Socket client = new Socket("127.0.0.1",2349);
         DataInputStream dis = new DataInputStream(client.getInputStream());
@@ -44,6 +58,14 @@ public class Client_QLSV {
                     break;
                 case 2:
                     dos.writeInt(n);
+
+                    System.out.print("Nhap so luong sinh vien can them: ");
+                    n = new Scanner(System.in).nextInt();
+
+                    for (int i = 0; i < n; i++) {
+                        AddST();
+                    }
+                    oos.writeObject(listST);
                     break;
                 case 3:
                     dos.writeInt(n);

@@ -30,7 +30,7 @@ public class Server_QLSV implements Serializable{
             }
             fr.close();
             br.close();
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),"Doc file thanh cong!");
+            System.out.println("Doc file thanh cong!");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),"Doc file khong thanh cong!");
         }
@@ -40,13 +40,21 @@ public class Server_QLSV implements Serializable{
         oos.writeObject(listST);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void AddST(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+        listST = (ArrayList<Student>) ois.readObject();
+        for (int i = 0; i < listST.size(); i++) {
+            System.out.println(listST.get(i).toString());
+        }
+    }
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         ServerSocket server = new ServerSocket(2349);
         Socket my_client = server.accept();
         DataInputStream dis = new DataInputStream(my_client.getInputStream());
         DataOutputStream dos = new DataOutputStream(my_client.getOutputStream());
         ObjectOutputStream oos = new ObjectOutputStream(my_client.getOutputStream());
+        ObjectInputStream ois = new ObjectInputStream(my_client.getInputStream());
         ReadFile();
 
         while (true) {
@@ -56,6 +64,8 @@ public class Server_QLSV implements Serializable{
                     Showdata(oos);
                     break;
                 case 2:
+                    AddST(ois);
+                    System.out.println("Server da nhan!");
                     break;
                 case 3:
                     break;
